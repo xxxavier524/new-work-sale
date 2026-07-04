@@ -1,0 +1,8 @@
+__pycache__/
+*.pyc
+.venv/
+venv/
+.DS_Store
+# 私有运营数据（真实订单/广告/库存 CSV 放这里，不入库）
+data/private/
+reports/

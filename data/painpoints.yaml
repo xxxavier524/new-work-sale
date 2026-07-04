@@ -1,0 +1,79 @@
+# 痛点研究档案（机器可读版，源自 PROJECT_PLAN §4，核实日 2026-07-04）
+# 用途：T2 差评挖掘 pipeline 的复现基准；T3 Listing 生成器的卖点溯源库
+# （T3 验收：每条卖点必须能溯源到下方 id）
+
+categories:
+  - name: 4WD 软装
+    source: "ProductReview.com.au / Trustpilot 上 Adventure Kings 评价库"
+    painpoints:
+      - id: C1
+        title: 五金件是死穴
+        frequency: 最高频
+        severity: high
+        evidence: 塑料夹扣首次使用即断裂，买家自行更换更结实扣件
+        counter: 金属扣具 + YKK 拉链（成本 +¥3–5）；Listing 首行 "Metal hardware. No plastic clips."
+      - id: C2
+        title: 面料与防水虚标
+        frequency: high
+        severity: medium
+        evidence: swag 面料偏薄、小雨渗湿
+        counter: 标注克重；只宣称 water-resistant 不写 waterproof；拍缝线视频验证
+      - id: C3
+        title: 电器类是差评核爆区
+        frequency: high
+        severity: high
+        evidence: 启动电源、发电机、冰箱大量一星
+        counter: 非电类进入点（一期负面清单禁带电）
+      - id: C4
+        title: 售后是 Kings 裸露侧翼
+        frequency: high
+        severity: high
+        evidence: 换货收 10% 重新上架费、保修推诿、配送商 96% 差评
+        counter: 小件直接补发不要求退回（见 docs/customer-service-sop.md）
+      - id: C5
+        title: QA 批次不稳
+        frequency: medium
+        severity: medium
+        evidence: 同型号体验两极
+        counter: 批检 SOP 写入 PI（10% 抽测扣具与缝线）
+
+  - name: 木虾/Squid jig
+    source: "enoughgun / AKFF 论坛、FishingMad 评测、零售商指南"
+    painpoints:
+      - id: J1
+        title: 锈与散架
+        frequency: 最高频
+        severity: high
+        evidence: "$2 档 rusted to bits；Yamashita 多年不锈"
+        counter: 不锈钢伞钩（生死线）；盐水浸泡 48h 测试写入质检单
+      - id: J2
+        title: 沉降姿态是功能命门
+        frequency: high
+        severity: high
+        evidence: 便宜 jig 直坠如石，钓友自己剪配重修正；屁股先沉的直接扔
+        counter: 逐批泡水校准 45° 沉姿 + 包装标注实测沉速（边际成本极低，中低价位无人做）
+      - id: J3
+        title: 歪游与旋转
+        frequency: medium
+        severity: high
+        evidence: 拖环弯曲 → 下沉旋转缠线杀死咬口
+        counter: swim-test 写入质检单
+      - id: J4
+        title: 收纳是无人认领的真痛点
+        frequency: medium
+        severity: medium
+        evidence: 湿 jig 带盐入包、钩冠互缠、盐分腐蚀、布面发臭；现有软包不透气
+        counter: 排水透气 wallet（配件空白，纯纺织零认证风险）
+
+competitive_facts:
+  - market: 木虾
+    fact: Yamashita A$16–20/只锚定高端；本土品牌 Rui A$11.99 + 本地配色 + 48h 达占中间档
+    conclusion: 不做单只对轰，做系统套装（SKU-B 定位依据）
+  - market: 4WD 软装
+    fact: Adventure Kings 走量低价、ARB 高价高质
+    conclusion: SKU-A 卡「金属五金层」中间位（Kings 之上、ARB 之下）
+
+sink_rate_benchmarks:  # Yamashita 对标（SKU-B 校准目标）
+  - {size: "2.5", weight_g: 10.5, sink_s_per_m: 5.0}
+  - {size: "3.0", weight_g: 15.0, sink_s_per_m: 3.5}
+  - {size: "3.5", weight_g: 20.0, sink_s_per_m: 3.0}

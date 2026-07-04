@@ -1,0 +1,44 @@
+# 单位经济模型配置（对应 docs/PROJECT_PLAN.md §5.1，全部可调）
+# ⚠ fx_aud_cny 以实时汇率为准，季度复核定价（见 docs/policy-watchlist.md）
+
+params:
+  fx_aud_cny: 4.7          # ⚠ 澳元→人民币汇率
+  channel_fee_rate: 0.19   # eBay FVF≈13.4% + 推广位≈5% 综合
+  shipping_cny_per_kg: 45  # 专线双清区间 40–55，时效 7–15 天
+  returns_provision: 0.05  # 退货拨备（占售价），实际触发 8% 即报警（G3）
+  gross_margin_floor: 0.55 # 毛利红线：低于此值不上架（纪律一）
+  fixed_cost_monthly: 900  # 工具订阅 + 代账摊销（CNY/月）
+
+# 敏感性情形（§5.2：三重悲观叠加仍须为正）
+scenarios:
+  aud_depreciation: 0.10   # 澳元贬值幅度
+  shipping_increase: 0.30  # 运费上涨幅度
+  returns_stress: 0.12     # 退货压力测试值
+
+skus:
+  - id: SKU-A
+    name: "Hilux/Ranger 座椅背 MOLLE 收纳系统（帆布）"
+    price_aud: 49.95
+    cost_cny: 38          # 采购价（金属扣具 +¥3–5 已含）
+    weight_kg: 0.8
+    shipping_cny: 40      # 显式运费（计划 §5.2 保护性取整；删除此行则按 weight_kg × shipping_cny_per_kg 计算）
+    packaging_cny: 7
+    mix: 0.5              # 销量占比（用于混合净率与保本单量）
+
+  - id: SKU-B
+    name: "Squid 入门系统套装（5 只校准木虾 + 排水收纳包）"
+    price_aud: 26.95      # 当前已验证口径；套装升级后 A$39.95 见下方注释
+    cost_cny: 28
+    weight_kg: 0.25
+    shipping_cny: 16      # 显式运费（同上，保护性取整）
+    packaging_cny: 4
+    mix: 0.5
+
+  # 套装升级版（⚠ 采购价 ¥45 为估算，wallet 询价后取消注释并重算）：
+  # - id: SKU-B-set
+  #   name: "Squid 系统套装升级版（含排水 wallet）"
+  #   price_aud: 39.95
+  #   cost_cny: 45
+  #   weight_kg: 0.35
+  #   packaging_cny: 4
+  #   mix: 0

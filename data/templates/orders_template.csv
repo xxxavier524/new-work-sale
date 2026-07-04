@@ -1,0 +1,5 @@
+date,order_id,sku,qty,sale_aud,status
+2026-08-01,EB-1001,SKU-A,1,49.95,delivered
+2026-08-01,EB-1002,SKU-B,1,26.95,shipped
+2026-08-03,EB-1003,SKU-B,2,53.90,delivered
+2026-08-05,EB-1004,SKU-A,1,49.95,returned
