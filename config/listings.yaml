@@ -1,0 +1,99 @@
+# Listing / 落地页数据源（T3 + T4 共用）
+# 规则：每条 claim 必须带 painpoint 字段溯源到 data/painpoints.yaml 的 id（T3 验收）
+# brand 占位 TBD —— AU 商标定名后全局替换
+
+brand: "TBD-BRAND"
+store_policy: "Faulty part? We ship a replacement and you keep the original — no return postage, no restocking fee."
+
+skus:
+  - id: SKU-A
+    product_name: "Seat Back MOLLE Organiser"
+    tagline: "Metal hardware. No plastic clips."
+    fitment: "Toyota Hilux N80 (2015+) & Ford Ranger PX/T6 rear seats"
+    price_aud: 49.95
+    primary_keyword: "hilux seat organiser"
+    title_variants:
+      - "Hilux N80 Ranger Seat Back MOLLE Organiser — All-Metal Clips, 900D Canvas"
+      - "4WD Seat MOLLE Panel Organiser Hilux Ranger — YKK Zips, Metal Hardware"
+      - "Touring Seat Organiser MOLLE for Hilux N80 Ranger PX — No Plastic Clips"
+    claims:
+      - painpoint: C1
+        bullet: "ALL-METAL buckles and mounting hardware — zero plastic clips to snap on day one"
+        proof: "built against the #1 complaint in 100+ big-brand organiser reviews"
+      - painpoint: C1
+        bullet: "Genuine YKK zippers on every pocket"
+        proof: "the zips that outlast the canvas"
+      - painpoint: C2
+        bullet: "900D canvas, weight stated on the label — honest water-resistant rating"
+        proof: "we don't claim waterproof, because no canvas organiser truly is"
+      - painpoint: C5
+        bullet: "Double-stitched, stitch pitch under 3mm, 10% of every batch pull-tested"
+        proof: "batch QC written into the factory contract, not a marketing line"
+      - painpoint: C4
+        bullet: "Faulty part? Replacement shipped in 24h, keep the original — no return postage"
+        proof: "small-store service, the opposite of the 10% restocking fee runaround"
+    scenario_hook: "Rig your second row like a canopy: med kit up top, recovery gloves mid, snacks where the kids can reach."
+    comparison:
+      rival: "Adventure Kings-style organiser"
+      rows:
+        - {feature: "Buckles & hooks", us: "All metal", them: "Plastic — their most-reported failure", painpoint: C1}
+        - {feature: "Zippers", us: "Genuine YKK", them: "Unbranded", painpoint: C1}
+        - {feature: "Fabric spec", us: "900D, weight stated", them: "Weight not disclosed", painpoint: C2}
+        - {feature: "Fit", us: "Hilux N80 / Ranger specific cut", them: "Universal sag-bag", painpoint: ~}
+        - {feature: "Warranty claim", us: "Replacement shipped, keep original", them: "10% restocking fee reported", painpoint: C4}
+    faq:
+      - q: "Will it fit my Hilux N70 or older Ranger?"
+        a: "This cut is for Hilux N80 (2015+) and Ranger PX/T6. If it doesn't fit your seat, we refund in full and you don't post anything back."
+        painpoint: C4
+      - q: "Is it waterproof?"
+        a: "It's water-resistant 900D canvas with the fabric weight stated on the label. We won't claim waterproof — no canvas organiser honestly is."
+        painpoint: C2
+      - q: "What if a buckle breaks?"
+        a: "Message us. A replacement ships within 24 hours and you keep the original — no return postage, no restocking fee."
+        painpoint: C4
+
+  - id: SKU-B
+    product_name: "Squid Jig System Kit (5 Calibrated Jigs + Drain Wallet)"
+    tagline: "Tank-tested sink rate, printed on every pack."
+    fitment: "Sizes 2.5 / 3.0 / 3.5 mixed — inshore to deeper grounds"
+    price_aud: 39.95
+    primary_keyword: "squid jig set"
+    title_variants:
+      - "Squid Jig Set 5pc + Drain Wallet — Tank-Tested Sink Rate, Stainless Prongs"
+      - "Egi Squid Jigs Kit 2.5 3.0 3.5 — Calibrated Fall, UV Glow, Storage Wallet"
+      - "Squid Jig Starter System 5 Pack — Printed Sink Rate, No-Rust Stainless Crowns"
+    claims:
+      - painpoint: J1
+        bullet: "Stainless steel crowns, 48-hour salt-soak tested — no rusted-to-bits surprises"
+        proof: "the failure that kills every cheap jig"
+      - painpoint: J2
+        bullet: "Every batch tank-tested to a 45° fall — measured sink rate printed on the pack"
+        proof: "2.5: ~5.0 s/m · 3.0: ~3.5 s/m · 3.5: ~3.0 s/m"
+      - painpoint: J3
+        bullet: "Swim-tested: no spinning, no crooked tow points, no line twist on the drop"
+        proof: "swim test is a line item on our QC sheet"
+      - painpoint: J4
+        bullet: "Mesh drain wallet included — wet jigs drip dry, crowns sheathed in EVA, no tangles, no stink"
+        proof: "the storage problem nobody else bothers to solve"
+      - painpoint: J1
+        bullet: "Tin weights, not lead — cleaner for the water you fish"
+        proof: "and no lead-sinker compliance questions"
+    scenario_hook: "Open the box, rig the 2.5, count it down at your local jetty — the sink rate on the pack is the one we measured, not a guess."
+    comparison:
+      rival: "A$2 bargain jigs / single premium jigs"
+      rows:
+        - {feature: "Crowns", us: "Stainless, salt-soak tested", them: "Mild steel — rust in weeks", painpoint: J1}
+        - {feature: "Sink rate", us: "Measured & printed per batch", them: "Unstated, nose-dives", painpoint: J2}
+        - {feature: "Swim attitude", us: "45° calibrated fall", them: "Spins / butt-first", painpoint: J3}
+        - {feature: "Storage", us: "Drain wallet + EVA hook sheaths", them: "None — rusty tangle in your bag", painpoint: J4}
+        - {feature: "System price", us: "A$39.95 for 5 + wallet", them: "A$80+ for 5 premium singles", painpoint: ~}
+    faq:
+      - q: "Are these as good as Yamashita?"
+        a: "Different job. Yamashita earns its A$16–20 per jig. Ours is the calibrated middle ground: tank-tested fall, stainless crowns, and a wallet — a working system for the price of two premium jigs."
+        painpoint: J2
+      - q: "Will the crowns rust?"
+        a: "They're stainless and every batch passes a 48-hour salt-soak before shipping. Rinse in fresh water and dry them in the wallet — that's what it's for."
+        painpoint: J1
+      - q: "What sizes are included?"
+        a: "One 2.5, two 3.0, two 3.5 — covers shallow jetties through deeper drifts. Measured sink rates for each size are printed on the pack."
+        painpoint: J2
