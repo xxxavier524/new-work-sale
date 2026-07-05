@@ -1,0 +1,112 @@
+# TikTok AI 内容工作流配置（营销模块 M1）
+# 方法论：选题库 → 爆款结构模板 → AI 批量生成 → 发布 → 数据回流选题（饼干哥哥式全 AI 工作流的本地化）
+# 用法见 tools/tiktok_pipeline.py；策略与合规见 docs/tiktok-playbook.md
+
+params:
+  fx_cny_usd: 7.2            # ⚠ 实时汇率为准
+  fx_aud_cny: 4.7
+  profit_goal_usd: 200        # MVP 目标：$200 净利润（≈ Claude Max 20x 一个月）
+  attribution_discount: 0.10  # 归因折扣码 TIKTOK10 的折扣率（从净贡献中扣除）
+  video_cost_cny: 4.6         # 即梦年费会员单条 15s 成本；火山 API 口径改 15.0
+  videos_per_week: 7          # 日更 1 条（MVP 节奏）
+  post_time_local: "18:30"    # 澳东时间晚高峰（AEST）；悉尼下班后刷手机窗口
+
+# 内容支柱（pillar）：每条视频归属一个支柱，数据回流后按支柱加减产能
+pillars:
+  - id: P1
+    name: pain-demo          # 痛点演示：竞品失败画面 → 我方对策
+    sku: SKU-A
+    weight: 3
+  - id: P2
+    name: satisfying-rig     # 解压整理：MOLLE 上装/收纳 ASMR 向
+    sku: SKU-A
+    weight: 2
+  - id: P3
+    name: squid-science      # 钓鱿科普：沉速/沉姿/为什么便宜木虾钓不到
+    sku: SKU-B
+    weight: 3
+  - id: P4
+    name: session-story      # 出钓叙事：一次夜钓/一次周末装车的故事线
+    sku: SKU-B
+    weight: 2
+
+# 钩子库（前 2 秒台词，EN-AU 口语）——source 溯源到 painpoints.yaml
+hooks:
+  - {id: H1, pillar: P1, source: C1, text: "Every 4WD organiser dies the same way. The clip."}
+  - {id: H2, pillar: P1, source: C1, text: "POV: your gear panel's plastic clip snaps 200km from bitumen."}
+  - {id: H3, pillar: P1, source: C2, text: "'Waterproof' canvas is a lie. Here's what honest looks like."}
+  - {id: H4, pillar: P2, source: C1, text: "Rigging my Hilux second row so nothing rattles. Ever."}
+  - {id: H5, pillar: P2, source: C4, text: "The $50 upgrade that ends the gear avalanche on your back seat."}
+  - {id: H6, pillar: P3, source: J2, text: "Your squid jig sinks like a brick. That's why you're not catching."}
+  - {id: H7, pillar: P3, source: J1, text: "This is what a $2 jig looks like after two sessions. Rust."}
+  - {id: H8, pillar: P3, source: J2, text: "Squid watch your jig fall for 5 full seconds. What do they see?"}
+  - {id: H9, pillar: P4, source: J4, text: "My tackle bag used to smell like death. One change fixed it."}
+  - {id: H10, pillar: P4, source: J2, text: "First cast with a jig that tells you its own sink rate."}
+
+# 视频结构模板（beats 秒数为目标值，总时长 15–27s）
+structures:
+  - id: S1
+    name: problem-agitate-solve
+    beats:
+      - {t: "0-2s",  role: hook,  note: "钩子台词 + 冲突画面"}
+      - {t: "2-8s",  role: agitate, note: "放大痛点：失败画面/慢镜头"}
+      - {t: "8-20s", role: solve, note: "我方产品对策，实拍特写位"}
+      - {t: "20-25s", role: cta,  note: "口播 CTA + 文字条"}
+  - id: S2
+    name: show-dont-tell
+    beats:
+      - {t: "0-2s",  role: hook,  note: "视觉钩子（无台词也成立）"}
+      - {t: "2-18s", role: process, note: "过程满足感：安装/整理/泡水测试"}
+      - {t: "18-24s", role: cta,  note: "轻 CTA（评论区引导）"}
+  - id: S3
+    name: myth-bust
+    beats:
+      - {t: "0-2s",  role: hook,  note: "反常识断言"}
+      - {t: "2-12s", role: evidence, note: "证据：对比画面/数据卡"}
+      - {t: "12-22s", role: reveal, note: "我方做法 + 实拍位"}
+      - {t: "22-27s", role: cta,  note: "CTA"}
+
+# Seedance 提示词模板（B-roll 与场景画面用；产品特写一律实拍——见 compliance）
+seedance:
+  base_style: "vertical 9:16, cinematic handheld, photorealistic, natural Australian light, no text, no logos, no human faces"
+  negative: "cartoon, anime, watermark, text overlay, distorted hands, brand logos"
+  shot_bank:
+    - {id: V1, pillar: P1, prompt: "4WD ute parked on red dirt track in Australian outback, golden hour, dust drifting, rear door open showing cluttered messy back seat with loose gear"}
+    - {id: V2, pillar: P1, prompt: "extreme close-up of a cheap plastic buckle snapping under tension in slow motion, fibers fraying, dramatic side light"}
+    - {id: V3, pillar: P2, prompt: "slow push-in on organized truck rear seat interior at dusk, warm light, everything strapped neat and still on corrugated road"}
+    - {id: V4, pillar: P3, prompt: "underwater shot of a squid jig sinking too fast nose-down in clear blue-green ocean water, sunbeams from surface, bubbles"}
+    - {id: V5, pillar: P3, prompt: "underwater slow motion of squid jig falling at gentle 45 degree angle, calm attitude, southern Australian kelp and rocks in background"}
+    - {id: V6, pillar: P4, prompt: "moody night jetty in Australia, fishing rod silhouette, headlamp beam over dark water, stars, quiet anticipation"}
+    - {id: V7, pillar: P4, prompt: "macro shot of rusty corroded fishing jig hooks tangled in a wet bag, harsh flashlight, decay texture"}
+    - {id: V8, pillar: P2, prompt: "time-lapse style shot of gear items flying into organized MOLLE pockets one by one, stop-motion feel, clean daylight"}
+
+# 实拍必备镜头（TikTok 商业内容政策：产品展示不得 AI 捏造 → 样品到手后拍一次全家桶素材，反复复用）
+real_footage_checklist:
+  - "SKU-A：金属扣具开合特写 ×3 角度（关键卖点=关键实拍）"
+  - "SKU-A：上车安装 30 秒完整过程（竖屏，手机夹稳定器）"
+  - "SKU-A：装满负重后关门/过坎晃动测试"
+  - "SKU-B：透明水桶泡水沉姿 45°（侧面平拍，前置强光）"
+  - "SKU-B：包装沉速标签特写（'printed sink rate' 是记忆点）"
+  - "SKU-B：盐水泡 48h 后 vs 便宜 jig 的锈蚀对比"
+  - "SKU-B：wallet 排水演示（水流出网眼的瞬间）"
+
+# CTA 库（轮换测试）
+ctas:
+  - {id: A1, text: "Link in bio — Aussie stock, GST sorted at checkout.", mode: bio-link}
+  - {id: A2, text: "Comment 'RIG' and I'll send you the setup list.", mode: comment-bait}
+  - {id: A3, text: "Full sink-rate test on the pack. Bio if you're curious.", mode: soft}
+  - {id: A4, text: "10% off with TIKTOK10 — link in bio.", mode: discount}
+
+hashtags:
+  base: ["#4wdaustralia", "#fishingaustralia", "#aussiefishing"]
+  P1: ["#hilux", "#fordranger", "#4wdsetup", "#tourersofaustralia"]
+  P2: ["#carorganization", "#satisfying", "#molle", "#utesofinstagram"]
+  P3: ["#squidfishing", "#egi", "#calamari", "#fishingtips"]
+  P4: ["#landbasedfishing", "#nightfishing", "#jettyfishing", "#squidding"]
+
+compliance:
+  - "每条含 AI 真实感画面的视频：发布时打开 AIGC 标签（组织内容开关）"
+  - "产品本体展示一律实拍素材；Seedance 只做场景/情绪/失败演示 B-roll"
+  - "禁止 AI 生成人脸/人声出镜背书（平台禁止 AI 假背书）"
+  - "文案脚本由 AI 生成属豁免范围，无需标注"
+  - "商业披露：带折扣码视频勾选 content disclosure（promotional content）"

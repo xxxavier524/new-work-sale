@@ -44,6 +44,20 @@ python3 -m unittest discover -s tests
 | T8 EAC 避雷 + Ozon 材料 | ✅ 初版 | `docs/ozon-eac-checklist.md`（⚠ 启动备线前逐项复核）|
 | T9 达人外联 CRM | ✅ | `crm/creators.csv` + `crm/outreach-templates.md`；候选预研 `crm/creator-candidates.md`（⚠ 待人工核实）|
 
+## 营销模块 M1：TikTok 全 AI 内容工作流
+
+策略与调研结论见 **[docs/tiktok-playbook.md](docs/tiktok-playbook.md)**；MVP 目标 $200 净利润（≈混合 24 单，嵌套于 G3）。
+
+```bash
+python3 tools/tiktok_pipeline.py brief --count 7          # 周批量：脚本+分镜+Seedance 提示词+发布检查
+python3 tools/tiktok_pipeline.py brief --count 7 --emit-llm-prompt   # 交给 Claude 精修口播稿
+python3 tools/tiktok_pipeline.py calendar --days 30 --start 2026-08-01
+python3 tools/tiktok_pipeline.py report --stats data/private/tiktok_stats.csv  # 周报+$200 进度+支柱加减产
+```
+
+选题库 = `data/painpoints.yaml`（每个钩子溯源真实差评）；钩子/结构/提示词库 = `config/tiktok.yaml`。
+合规纪律已内置：AIGC 标签、产品实拍位强制、折扣码商业披露。
+
 ## 执行配套（超出 §9 清单的落地材料）
 
 | 材料 | 位置 | 服务哪个阶段 |
