@@ -44,9 +44,18 @@
 - [ ] 目标关键词头部竞品月销 > 100 件
 - [ ] A$40–60 价格带有真实成交（而非只有 A$15 垃圾档在动）
 
-**成本模型侧（已由 T1 计算器验证 ✅）**：SKU-A 毛利 63.8%、SKU-B 62.1%，均 ≥55% 红线。
-第三个 SKU 落地成本模型待补（G1 要求 ≥3 个 SKU 过线）——把候选 SKU 参数加进
-`config/economics.yaml` 跑 `python3 tools/cost_calculator.py` 即得。
+**成本模型侧（已由 T1 计算器验证 ✅，共 4 个 SKU 过线）**：
+
+| SKU | 毛利率 | 口径 |
+|---|---|---|
+| SKU-A MOLLE 收纳 | 63.8% | 已验证 |
+| SKU-B 木虾套装 | 62.1% | 已验证 |
+| SKU-C Awning 挂壁袋 | 68.0% | ⚠ 估算价（¥30），询价后复算 |
+| SKU-D Rod holder 竿包 | 66.0% | ⚠ 估算价（¥32），询价后复算 |
+
+候选建模沙盒：`python3 tools/cost_calculator.py --config config/economics-candidates.yaml`。
+C/D 余量充足：采购价即使比估算高 ¥15–20 仍过 55% 红线；询价落定后把数字改进沙盒复算，
+过线者迁入 `config/economics.yaml`。**G1 的「≥3 SKU 过线」成本侧已满足，卡点只剩 sold 数据。**
 
 **判定结果**（填写）：
 - G1 状态：☐ 开闸 / ☐ 不达标 → 换第二梯队关键词重跑

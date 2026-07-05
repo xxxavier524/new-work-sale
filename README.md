@@ -42,7 +42,17 @@ python3 -m unittest discover -s tests
 | T6 周报 dashboard | ✅ | `tools/weekly_report.py`（G3/G4 距离、退货报警、库存周转）|
 | T7 政策监控清单 | ✅ | `docs/policy-watchlist.md`（四项硬指标 + 季度 checklist）|
 | T8 EAC 避雷 + Ozon 材料 | ✅ 初版 | `docs/ozon-eac-checklist.md`（⚠ 启动备线前逐项复核）|
-| T9 达人外联 CRM | ✅ | `crm/creators.csv` + `crm/outreach-templates.md` |
+| T9 达人外联 CRM | ✅ | `crm/creators.csv` + `crm/outreach-templates.md`；候选预研 `crm/creator-candidates.md`（⚠ 待人工核实）|
+
+## 执行配套（超出 §9 清单的落地材料）
+
+| 材料 | 位置 | 服务哪个阶段 |
+|---|---|---|
+| 候选 SKU 建模沙盒（C/D ⚠ 估算价）| `config/economics-candidates.yaml` | G1「≥3 SKU 过线」，成本侧已满足 |
+| 供应链执行手册（询价话术/验厂三件套/PI 条款/G2 样测记录表/批检 SOP）| `docs/supply-chain-playbook.md` | D0–30 → G2 |
+| 复购邮件流（3 封 + 频控合规规则）| `crm/email-flows.md` | D61–90 |
+| Ozon 招商建联话术 | `docs/ozon-eac-checklist.md` §C | 备线三件事 |
+| 政策复查日历（导入手机日历）| `docs/policy-reviews.ics` | T7 季度复查 + 俄线死线 |
 
 ## 当前关键路径（人工，机器代替不了）
 

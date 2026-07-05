@@ -1,0 +1,43 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//new-work-sale//policy-watchlist//CN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:跨境政策复查（T7）
+BEGIN:VEVENT
+UID:policy-q1-20261004@new-work-sale
+DTSTART;VALUE=DATE:20261004
+SUMMARY:季度政策复查 Q1（T7 四项硬指标）
+DESCRIPTION:按 docs/policy-watchlist.md checklist 执行：①澳洲 A$1000 免税线 ②AUD 汇率（偏离 4.7±5% 则重跑 T1）③专线双商比价 ④俄 VAT/免税线扫描 ⑤eBay 费率表。异动写入变化记录。
+END:VEVENT
+BEGIN:VEVENT
+UID:brazil-congress-20260901@new-work-sale
+DTSTART;VALUE=DATE:20260901
+SUMMARY:巴西国会批准状态检查（120 天窗口临近）
+DESCRIPTION:2026-05 行政令（≤$50 免联邦税）须国会 120 天内批准。仅观察，不投入（PROJECT_PLAN §1）。
+END:VEVENT
+BEGIN:VEVENT
+UID:policy-q2-20270104@new-work-sale
+DTSTART;VALUE=DATE:20270104
+SUMMARY:季度政策复查 Q2（T7 四项硬指标）
+DESCRIPTION:同 Q1 checklist。另：本季度起俄 VAT 5% 生效，确认平台代扣执行细则（§10-3）。
+END:VEVENT
+BEGIN:VEVENT
+UID:policy-q3-20270404@new-work-sale
+DTSTART;VALUE=DATE:20270404
+SUMMARY:季度政策复查 Q3 + 备线启动预判
+DESCRIPTION:同 Q1 checklist。距俄线死线仅 3 个月：若主线 G4 已过且现金流支持，本季度完成 Ozon 入驻材料准备。
+END:VEVENT
+BEGIN:VEVENT
+UID:russia-deadline-20270630@new-work-sale
+DTSTART;VALUE=DATE:20270630
+SUMMARY:⚠ 俄罗斯备线死线：启动或放弃（不可顺延）
+DESCRIPTION:PROJECT_PLAN §6 窗口纪律：€200 免税 + 超额 5% 红利期至 2027 年底，VAT 已开始爬坡。今天必须做出二选一决定并执行。
+END:VEVENT
+BEGIN:VEVENT
+UID:policy-q4-20270704@new-work-sale
+DTSTART;VALUE=DATE:20270704
+SUMMARY:季度政策复查 Q4（T7 四项硬指标）
+DESCRIPTION:同 Q1 checklist。年度复盘：数据核实日满一年，PROJECT_PLAN §1 政策棋盘全表重核。
+END:VEVENT
+END:VCALENDAR

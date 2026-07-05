@@ -1,0 +1,54 @@
+# G1 建模沙盒：已验证 SKU（A/B）+ 第二梯队候选（C/D，⚠ 采购价为估算，询价后修正）
+# 与 config/economics.yaml 的区别：本文件用于 G1「≥3 个 SKU 毛利 ≥55%」的判定试算，
+# 候选 SKU mix=0 不参与混合净率与保本单量；询价落定后把过线者迁入 economics.yaml。
+# 用法：python3 tools/cost_calculator.py --config config/economics-candidates.yaml
+
+params:
+  fx_aud_cny: 4.7
+  channel_fee_rate: 0.19
+  shipping_cny_per_kg: 45
+  returns_provision: 0.05
+  gross_margin_floor: 0.55
+  fixed_cost_monthly: 900
+
+scenarios:
+  aud_depreciation: 0.10
+  shipping_increase: 0.30
+  returns_stress: 0.12
+
+skus:
+  - id: SKU-A
+    name: "Hilux/Ranger 座椅背 MOLLE 收纳系统（已验证）"
+    price_aud: 49.95
+    cost_cny: 38
+    weight_kg: 0.8
+    shipping_cny: 40
+    packaging_cny: 7
+    mix: 0.5
+
+  - id: SKU-B
+    name: "Squid 入门系统套装（已验证）"
+    price_aud: 26.95
+    cost_cny: 28
+    weight_kg: 0.25
+    shipping_cny: 16
+    packaging_cny: 4
+    mix: 0.5
+
+  - id: SKU-C
+    name: "⚠ 候选：Awning 周边收纳（帆布挂壁袋，非电）"
+    price_aud: 39.95
+    cost_cny: 30      # ⚠ 估算：帆布挂袋，广州同厂可打样；询价后修正
+    weight_kg: 0.5
+    shipping_cny: 25  # ⚠ 估算（0.5kg × 45 = 22.5，保护性取整）
+    packaging_cny: 5
+    mix: 0
+
+  - id: SKU-D
+    name: "⚠ 候选：Rod holder 软装（4 支装帆布竿包/竿束）"
+    price_aud: 36.95
+    cost_cny: 32      # ⚠ 估算：帆布+EVA 内衬；威海/广州均可询
+    weight_kg: 0.45
+    shipping_cny: 22  # ⚠ 估算（0.45kg × 45 = 20.25，保护性取整）
+    packaging_cny: 5
+    mix: 0
